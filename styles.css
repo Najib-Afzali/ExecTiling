@@ -1,0 +1,402 @@
+/* ============================================================================
+   EXECUTIVE TILING — STYLESHEET
+   Design language: architectural luxury (Apple/Tesla restraint) for premium
+   residential & commercial tiling. White base, charcoal, brushed silver.
+   Signature device: the "grout line" — a precise hairline that structures the
+   whole page, echoing perfectly set tile.
+   ----------------------------------------------------------------------------
+   CONTENTS
+   1. Tokens            6. Buttons          11. Townhouse      16. Footer
+   2. Reset / base      7. Header / nav     12. Gallery        17. Sticky call
+   3. Typography        8. Hero             13. Testimonials   18. Reveal anim
+   4. Layout            9. Trust bar        14. Quote CTA      19. Responsive
+   5. Sections / eyebrow 10. Services       15. Contact / form 20. Reduced motion
+   ============================================================================ */
+
+/* ── 1. TOKENS ───────────────────────────────────────────────────────────── */
+:root{
+  --ink:#15171a;          /* near-black: primary text, dark sections        */
+  --graphite:#202327;     /* alt dark surface                                */
+  --slate:#5e646c;        /* secondary text                                  */
+  --slate-light:#8b9098;  /* tertiary / captions                             */
+  --silver:#a9aeb6;       /* metallic accent                                 */
+  --silver-bright:#d9dce0;
+  --mist:#e6e8ec;         /* hairlines, borders                              */
+  --cloud:#f3f4f6;        /* light grey surface                              */
+  --snow:#fcfcfd;         /* page base                                       */
+  --white:#ffffff;
+
+  /* brushed-metal sheen for accents (the only "decorative" gradient) */
+  --sheen:linear-gradient(115deg,#9498a0 0%,#d9dce0 26%,#aeb3ba 48%,#eef0f2 68%,#a3a8b0 100%);
+
+  --font-display:"Archivo Expanded","Archivo","Inter",system-ui,sans-serif;
+  --font-head:"Archivo","Inter",system-ui,sans-serif;
+  --font-body:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
+
+  --maxw:1240px;
+  --gut:clamp(1.25rem,4vw,2.5rem);     /* page side gutter                   */
+  --sec:clamp(4.5rem,9vw,8.5rem);      /* vertical section rhythm            */
+
+  --r:14px;               /* card radius                                     */
+  --r-sm:9px;
+  --ease:cubic-bezier(.22,.61,.36,1);
+  --shadow:0 1px 2px rgba(21,23,26,.04),0 18px 40px -24px rgba(21,23,26,.18);
+  --shadow-lg:0 2px 4px rgba(21,23,26,.05),0 40px 80px -36px rgba(21,23,26,.28);
+}
+
+/* ── 2. RESET / BASE ─────────────────────────────────────────────────────── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  font-family:var(--font-body);
+  color:var(--ink);
+  background:var(--snow);
+  line-height:1.6;
+  font-size:1rem;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+  overflow-x:hidden;
+}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+ul{list-style:none}
+button{font:inherit;cursor:pointer;border:none;background:none;color:inherit}
+:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:3px}
+::selection{background:var(--ink);color:var(--white)}
+
+/* ── 3. TYPOGRAPHY ───────────────────────────────────────────────────────── */
+h1,h2,h3,h4{font-family:var(--font-head);font-weight:700;line-height:1.05;letter-spacing:-.02em;color:var(--ink)}
+.display{font-family:var(--font-display);font-weight:800;letter-spacing:-.03em;line-height:.98}
+h1{font-size:clamp(2.5rem,6.5vw,5.5rem)}
+h2{font-size:clamp(1.9rem,4.2vw,3.3rem)}
+h3{font-size:clamp(1.25rem,2vw,1.6rem)}
+p{color:var(--slate)}
+.lead{font-size:clamp(1.05rem,1.6vw,1.3rem);color:var(--slate);line-height:1.6;max-width:60ch}
+strong{color:var(--ink);font-weight:600}
+
+/* ── 4. LAYOUT ───────────────────────────────────────────────────────────── */
+.wrap{max-width:var(--maxw);margin-inline:auto;padding-inline:var(--gut)}
+.section{padding-block:var(--sec)}
+.section--cloud{background:var(--cloud)}
+.section--ink{background:var(--ink);color:var(--silver-bright)}
+.section--ink h2,.section--ink h3{color:var(--white)}
+.section--ink p{color:#b6bbc2}
+.hairline{height:1px;background:var(--mist);border:0;max-width:var(--maxw);margin-inline:auto}
+.section--ink .hairline{background:rgba(255,255,255,.1)}
+
+/* ── 5. SECTION HEADERS / EYEBROW (the grout-line motif) ─────────────────── */
+.eyebrow{
+  display:inline-flex;align-items:center;gap:.7rem;
+  font-family:var(--font-body);font-size:.75rem;font-weight:600;
+  letter-spacing:.22em;text-transform:uppercase;color:var(--slate);
+  margin-bottom:1.25rem;
+}
+.eyebrow::before{content:"";width:34px;height:1px;background:var(--sheen)}
+.section--ink .eyebrow{color:var(--silver)}
+.sec-head{max-width:64ch;margin-bottom:clamp(2.5rem,5vw,4rem)}
+.sec-head p{margin-top:1.1rem}
+
+/* ── 6. BUTTONS ──────────────────────────────────────────────────────────── */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:.5rem;
+  padding:.95rem 1.7rem;border-radius:100px;font-family:var(--font-head);
+  font-weight:600;font-size:.95rem;letter-spacing:.01em;
+  transition:transform .35s var(--ease),background .35s var(--ease),
+             color .35s var(--ease),box-shadow .35s var(--ease),border-color .35s var(--ease);
+  will-change:transform;
+}
+.btn:hover{transform:translateY(-2px)}
+.btn:active{transform:translateY(0)}
+.btn--primary{background:var(--ink);color:var(--white);box-shadow:0 10px 30px -12px rgba(21,23,26,.55)}
+.btn--primary:hover{background:#000;box-shadow:0 16px 38px -14px rgba(21,23,26,.6)}
+.btn--ghost{border:1px solid var(--mist);color:var(--ink);background:var(--white)}
+.btn--ghost:hover{border-color:var(--ink)}
+.btn--light{background:var(--white);color:var(--ink)}
+.btn--light:hover{background:var(--silver-bright)}
+.btn--outline-light{border:1px solid rgba(255,255,255,.28);color:var(--white)}
+.btn--outline-light:hover{border-color:var(--white);background:rgba(255,255,255,.06)}
+.btn-row{display:flex;flex-wrap:wrap;gap:.85rem}
+
+/* link with animated underline */
+.tlink{position:relative;font-weight:600;color:var(--ink)}
+.tlink::after{content:"";position:absolute;left:0;bottom:-3px;width:100%;height:1px;background:var(--ink);transform:scaleX(0);transform-origin:left;transition:transform .4s var(--ease)}
+.tlink:hover::after{transform:scaleX(1)}
+.section--ink .tlink{color:var(--white)}
+.section--ink .tlink::after{background:var(--white)}
+
+/* ── 7. HEADER / NAV ─────────────────────────────────────────────────────── */
+.hdr{position:fixed;inset:0 0 auto 0;z-index:100;transition:background .4s var(--ease),box-shadow .4s var(--ease),border-color .4s var(--ease);border-bottom:1px solid transparent}
+.hdr__inner{max-width:var(--maxw);margin-inline:auto;padding:1rem var(--gut);display:flex;align-items:center;justify-content:space-between;gap:1.5rem}
+.hdr.scrolled{background:rgba(252,252,253,.82);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom-color:var(--mist);box-shadow:0 1px 20px -12px rgba(21,23,26,.2)}
+
+/* wordmark — swap for <img src="images/logo.png"> when you have the file */
+.brand{display:inline-flex;align-items:center;gap:.7rem;font-family:var(--font-display);font-weight:800;font-size:1.15rem;letter-spacing:.02em;color:var(--ink)}
+.brand__mark{width:30px;height:30px;border-radius:7px;background:var(--ink);position:relative;flex:none;overflow:hidden}
+.brand__mark::before{content:"";position:absolute;inset:6px;border:1px solid rgba(255,255,255,.55)}
+.brand__mark::after{content:"";position:absolute;inset:6px;background:var(--sheen);opacity:.0;mix-blend-mode:screen}
+.brand b{font-weight:800}
+.brand span{font-weight:500;color:var(--slate);font-family:var(--font-head);font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;align-self:center}
+
+.nav{display:flex;align-items:center;gap:2rem}
+.nav__links{display:flex;gap:1.9rem}
+.nav__links a{font-family:var(--font-head);font-weight:500;font-size:.95rem;color:var(--ink);position:relative;padding:.2rem 0}
+.nav__links a::after{content:"";position:absolute;left:0;bottom:-2px;width:100%;height:1.5px;background:var(--ink);transform:scaleX(0);transform-origin:left;transition:transform .35s var(--ease)}
+.nav__links a:hover::after,.nav__links a[aria-current="page"]::after{transform:scaleX(1)}
+.nav__links a[aria-current="page"]{color:var(--ink)}
+
+.hdr__cta{display:flex;align-items:center;gap:.9rem}
+.hdr__phone{font-family:var(--font-head);font-weight:600;font-size:.95rem;display:inline-flex;align-items:center;gap:.5rem}
+.hdr__phone svg{width:15px;height:15px}
+
+/* mobile toggle */
+.burger{display:none;width:44px;height:44px;border-radius:9px;align-items:center;justify-content:center}
+.burger span{display:block;width:22px;height:1.5px;background:var(--ink);position:relative;transition:transform .35s var(--ease),opacity .25s}
+.burger span::before,.burger span::after{content:"";position:absolute;left:0;width:22px;height:1.5px;background:var(--ink);transition:transform .35s var(--ease)}
+.burger span::before{top:-7px}.burger span::after{top:7px}
+.nav.open .burger span{background:transparent}
+.nav.open .burger span::before{transform:translateY(7px) rotate(45deg)}
+.nav.open .burger span::after{transform:translateY(-7px) rotate(-45deg)}
+
+/* ── 8. HERO ─────────────────────────────────────────────────────────────── */
+.hero{position:relative;padding-top:clamp(9rem,16vh,12rem);padding-bottom:var(--sec);overflow:hidden}
+.hero__grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(2rem,5vw,4.5rem);align-items:center}
+.hero__eyebrow{margin-bottom:1.6rem}
+.hero h1{margin-bottom:1.6rem}
+/* brushed-metal headline fill — dark enough to stay legible on white */
+.hero h1 .sheen{background:linear-gradient(118deg,#2b2e33 0%,#6a6f78 46%,#34373c 64%,#777c84 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero__sub{font-size:clamp(1.05rem,1.5vw,1.22rem);color:var(--slate);max-width:46ch;margin-bottom:2.3rem;line-height:1.6}
+.hero__cta{margin-bottom:2.4rem}
+.hero__meta{display:flex;flex-wrap:wrap;gap:1.6rem;padding-top:1.8rem;border-top:1px solid var(--mist)}
+.hero__meta div{display:flex;flex-direction:column}
+.hero__meta dt{font-family:var(--font-display);font-weight:800;font-size:1.7rem;color:var(--ink);line-height:1}
+.hero__meta dd{font-size:.82rem;color:var(--slate);margin-top:.35rem;letter-spacing:.02em}
+
+/* hero visual: stacked architectural tile planes with sheen + grout grid */
+.hero__visual{position:relative;aspect-ratio:4/5;border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow-lg)}
+.hero__visual .tile-ph,.split__visual .tile-ph,.gal-item .tile-ph{position:absolute;inset:0}
+.hero__badge{position:absolute;left:1.4rem;bottom:1.4rem;right:1.4rem;background:rgba(252,252,253,.9);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid var(--mist);border-radius:11px;padding:1rem 1.2rem;display:flex;align-items:center;gap:.9rem}
+.hero__badge svg{width:30px;height:30px;flex:none}
+.hero__badge p{margin:0;font-size:.82rem;color:var(--slate);line-height:1.4}
+.hero__badge strong{display:block;color:var(--ink);font-family:var(--font-head);font-size:.95rem}
+
+/* ── 9. TRUST / CAPABILITY BAR ───────────────────────────────────────────── */
+.trust{border-block:1px solid var(--mist);background:var(--white)}
+.trust__inner{display:flex;flex-wrap:wrap;align-items:center;gap:.4rem 2.2rem;padding-block:1.4rem}
+.trust__item{display:inline-flex;align-items:center;gap:.6rem;font-family:var(--font-head);font-weight:500;font-size:.92rem;color:var(--ink);white-space:nowrap}
+.trust__item::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--silver)}
+.trust__item:first-child::before{display:none}
+
+/* ── 10. SERVICES ────────────────────────────────────────────────────────── */
+.svc-group{margin-top:3rem}
+.svc-group:first-of-type{margin-top:0}
+.svc-group__label{display:flex;align-items:baseline;gap:1rem;margin-bottom:1.4rem}
+.svc-group__label h3{font-family:var(--font-head);font-size:1.05rem;letter-spacing:.04em;text-transform:uppercase}
+.svc-group__label .ln{flex:1;height:1px;background:var(--mist)}
+.svc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.1rem}
+.svc-card{
+  position:relative;background:var(--white);border:1px solid var(--mist);
+  border-radius:var(--r);padding:1.7rem 1.6rem 1.6rem;overflow:hidden;
+  transition:transform .45s var(--ease),box-shadow .45s var(--ease),border-color .45s var(--ease);
+}
+.svc-card::after{content:"";position:absolute;left:0;top:0;height:100%;width:2px;background:var(--sheen);transform:scaleY(0);transform-origin:top;transition:transform .45s var(--ease)}
+.svc-card:hover{transform:translateY(-4px);box-shadow:var(--shadow);border-color:transparent}
+.svc-card:hover::after{transform:scaleY(1)}
+.svc-card__num{font-family:var(--font-display);font-weight:800;font-size:.8rem;color:var(--silver);letter-spacing:.05em}
+.svc-card h4{font-size:1.18rem;margin:.7rem 0 .5rem;letter-spacing:-.01em}
+.svc-card p{font-size:.92rem;line-height:1.55}
+
+/* ── 11. WHY CHOOSE (dark) + values ──────────────────────────────────────── */
+.values{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:2.4rem 2.6rem;margin-top:1rem}
+.value__n{font-family:var(--font-display);font-weight:800;font-size:.85rem;color:var(--silver);letter-spacing:.05em}
+.value h3{color:var(--white);font-size:1.3rem;margin:.7rem 0 .6rem}
+.value p{font-size:.95rem;color:#b6bbc2;line-height:1.6}
+
+/* ── 11b. TOWNHOUSE / DEVELOPMENT ────────────────────────────────────────── */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,5vw,4.5rem);align-items:center}
+.split__visual{aspect-ratio:5/4;border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow-lg);position:relative}
+.checklist{margin-top:1.8rem;display:grid;gap:.85rem}
+.checklist li{display:flex;align-items:flex-start;gap:.8rem;font-size:1rem;color:var(--ink)}
+.checklist svg{width:20px;height:20px;flex:none;margin-top:2px}
+.section--ink .checklist li{color:var(--silver-bright)}
+
+/* ── 12. GALLERY ─────────────────────────────────────────────────────────── */
+.filter{display:flex;flex-wrap:wrap;gap:.6rem;margin-bottom:2.2rem}
+.filter button{
+  padding:.55rem 1.15rem;border-radius:100px;border:1px solid var(--mist);
+  font-family:var(--font-head);font-weight:500;font-size:.88rem;color:var(--slate);
+  background:var(--white);transition:all .3s var(--ease);
+}
+.filter button:hover{border-color:var(--ink);color:var(--ink)}
+.filter button.active{background:var(--ink);color:var(--white);border-color:var(--ink)}
+.gal-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.1rem}
+.gal-item{
+  position:relative;aspect-ratio:4/3;border-radius:var(--r);overflow:hidden;
+  border:1px solid var(--mist);transition:transform .5s var(--ease),box-shadow .5s var(--ease),opacity .4s var(--ease);
+}
+.gal-item:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+.gal-item__cap{position:absolute;inset:auto 0 0 0;padding:2.2rem 1.2rem 1.1rem;background:linear-gradient(to top,rgba(14,16,19,.88) 12%,rgba(14,16,19,.5) 52%,transparent);color:var(--white)}
+.gal-item__cap span{font-family:var(--font-body);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--silver-bright);opacity:.95;text-shadow:0 1px 8px rgba(0,0,0,.45)}
+.gal-item__cap strong{display:block;font-family:var(--font-head);font-weight:600;font-size:1.05rem;margin-top:.25rem;color:var(--white);text-shadow:0 1px 12px rgba(0,0,0,.55)}
+.gal-item.hide{display:none}
+
+/* ── 13. TESTIMONIALS ────────────────────────────────────────────────────── */
+.quote-grid{columns:3 300px;column-gap:1.1rem}
+.quote-card{
+  break-inside:avoid;margin-bottom:1.1rem;background:var(--white);
+  border:1px solid var(--mist);border-radius:var(--r);padding:1.7rem 1.6rem;
+}
+.quote-card__mark{font-family:var(--font-display);font-weight:800;font-size:2.4rem;line-height:.5;color:var(--silver);height:1rem;display:block}
+.quote-card blockquote{font-size:1.02rem;line-height:1.6;color:var(--ink);margin:.5rem 0 1.3rem}
+.quote-card cite{font-style:normal;display:flex;flex-direction:column}
+.quote-card cite b{font-family:var(--font-head);font-weight:600;font-size:.95rem;color:var(--ink)}
+.quote-card cite span{font-size:.82rem;color:var(--slate)}
+.section--ink .quote-card{background:var(--graphite);border-color:rgba(255,255,255,.08)}
+.section--ink .quote-card blockquote{color:var(--white)}
+.section--ink .quote-card cite b{color:var(--white)}
+
+/* rotating trust strip */
+.strip{background:var(--ink);overflow:hidden}
+.strip__track{display:flex;align-items:center;gap:3rem;padding-block:1.1rem;white-space:nowrap;animation:marquee 28s linear infinite}
+.strip__track span{font-family:var(--font-head);font-weight:500;font-size:.95rem;color:var(--silver-bright);display:inline-flex;align-items:center;gap:3rem}
+.strip__track span::after{content:"◆";color:var(--silver);font-size:.6rem}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ── 14. QUOTE CTA ───────────────────────────────────────────────────────── */
+.cta-band{position:relative;background:var(--ink);border-radius:var(--r);padding:clamp(2.5rem,5vw,4.5rem);overflow:hidden;text-align:center}
+.cta-band::before{content:"";position:absolute;inset:0;background:var(--sheen);opacity:.06}
+.cta-band h2{color:var(--white);max-width:18ch;margin-inline:auto;position:relative}
+.cta-band p{color:#b6bbc2;max-width:48ch;margin:1.1rem auto 2rem;position:relative}
+.cta-band .btn-row{justify-content:center;position:relative}
+
+/* ── 15. CONTACT / FORM ──────────────────────────────────────────────────── */
+.contact-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:clamp(2rem,5vw,4rem)}
+.contact-info dl{display:grid;gap:1.6rem;margin-top:.5rem}
+.contact-info dt{font-family:var(--font-body);font-size:.74rem;letter-spacing:.2em;text-transform:uppercase;color:var(--slate);margin-bottom:.3rem}
+.contact-info dd{font-family:var(--font-head);font-size:1.15rem;color:var(--ink)}
+.contact-info dd a:hover{color:var(--slate)}
+
+.form{background:var(--white);border:1px solid var(--mist);border-radius:var(--r);padding:clamp(1.6rem,3vw,2.4rem);box-shadow:var(--shadow)}
+.form__row{display:grid;grid-template-columns:1fr 1fr;gap:1.1rem}
+.field{margin-bottom:1.1rem;display:flex;flex-direction:column}
+.field--full{grid-column:1/-1}
+.field label{font-family:var(--font-head);font-weight:500;font-size:.85rem;margin-bottom:.45rem;color:var(--ink)}
+.field label .req{color:var(--slate)}
+.field input,.field select,.field textarea{
+  font-family:var(--font-body);font-size:.95rem;color:var(--ink);
+  padding:.8rem .9rem;border:1px solid var(--mist);border-radius:var(--r-sm);
+  background:var(--snow);transition:border-color .3s var(--ease),box-shadow .3s var(--ease);
+}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--ink);box-shadow:0 0 0 3px rgba(21,23,26,.07);background:var(--white)}
+.field textarea{resize:vertical;min-height:120px}
+.field input[type=file]{padding:.6rem;background:var(--cloud);cursor:pointer;font-size:.85rem}
+.field__hint{font-size:.78rem;color:var(--slate-light);margin-top:.4rem}
+.form__submit{margin-top:.4rem}
+.form__note{font-size:.8rem;color:var(--slate-light);margin-top:1rem;text-align:center}
+.form__success{display:none;background:var(--ink);color:var(--white);border-radius:var(--r);padding:2.4rem;text-align:center}
+.form__success.show{display:block}
+.form__success h3{color:var(--white);margin-bottom:.6rem}
+.form__success p{color:#b6bbc2}
+
+/* ── 16. FOOTER ──────────────────────────────────────────────────────────── */
+.ftr{background:var(--ink);color:#b6bbc2;padding-block:clamp(3.5rem,6vw,5rem) 2rem}
+.ftr__top{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:2.5rem;padding-bottom:3rem;border-bottom:1px solid rgba(255,255,255,.1)}
+.ftr .brand{color:var(--white)}
+.ftr .brand span{color:var(--silver)}
+.ftr__blurb{margin-top:1.1rem;font-size:.92rem;max-width:30ch;color:#9aa0a8}
+.ftr__col h4{color:var(--white);font-family:var(--font-head);font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;margin-bottom:1.1rem;font-weight:600}
+.ftr__col a{display:block;font-size:.92rem;color:#b6bbc2;padding:.32rem 0;transition:color .3s var(--ease)}
+.ftr__col a:hover{color:var(--white)}
+.ftr__bottom{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem;padding-top:1.8rem;font-size:.82rem;color:#7c828a}
+.ftr__bottom a:hover{color:var(--white)}
+
+/* ── 17. STICKY MOBILE CALL ──────────────────────────────────────────────── */
+.callbar{position:fixed;left:0;right:0;bottom:0;z-index:90;display:none;padding:.7rem var(--gut) calc(.7rem + env(safe-area-inset-bottom));background:rgba(252,252,253,.92);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-top:1px solid var(--mist);gap:.7rem}
+.callbar .btn{flex:1}
+
+/* ── 18. SCROLL REVEAL ───────────────────────────────────────────────────── */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.reveal.in{opacity:1;transform:none}
+.reveal[data-d="1"]{transition-delay:.08s}
+.reveal[data-d="2"]{transition-delay:.16s}
+.reveal[data-d="3"]{transition-delay:.24s}
+.reveal[data-d="4"]{transition-delay:.32s}
+
+/* ── TILE PLACEHOLDER (premium, swappable) ───────────────────────────────────
+   Evokes large-format polished tile with a grout grid + diagonal sheen.
+   When a real photo is supplied it's set as background-image inline and the
+   .tile-ph styles below sit underneath (so there's never a blank box). */
+.tile-ph{
+  position:relative;overflow:hidden;
+  --c1:#cfd3d9;--c2:#abb0b8;--c3:#e8eaee;--vein:rgba(255,255,255,.55);--joint:rgba(38,42,48,.17);
+  background:
+    /* moving polish highlight (reads as a glossy finish) */
+    linear-gradient(116deg,rgba(255,255,255,0) 32%,rgba(255,255,255,.34) 47%,rgba(255,255,255,0) 61%),
+    /* soft marble veining */
+    linear-gradient(72deg,transparent 0 45.6%,var(--vein) 46% 46.5%,transparent 47% 100%),
+    linear-gradient(58deg,transparent 0 64.6%,rgba(255,255,255,.30) 65% 65.4%,transparent 66%),
+    /* grout grid = tile joints */
+    repeating-linear-gradient(0deg,transparent 0 calc(50% - .7px),var(--joint) calc(50% - .7px) calc(50% + .7px),transparent calc(50% + .7px)),
+    repeating-linear-gradient(90deg,transparent 0 calc(33.33% - .7px),var(--joint) calc(33.33% - .7px) calc(33.33% + .7px),transparent calc(33.33% + .7px)),
+    /* stone base with corner light */
+    radial-gradient(130% 95% at 24% 16%,var(--c3),transparent 56%),
+    linear-gradient(134deg,var(--c1),var(--c2));
+  background-size:cover;background-position:center;
+}
+/* inset depth + crisp panel edge so it reads as a finished surface, not a flat box */
+.tile-ph::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.14),
+    inset 0 -46px 80px -46px rgba(18,20,24,.42),
+    inset 0 46px 80px -56px rgba(255,255,255,.55);
+}
+/* tonal variants (assigned per category in JS / per section in markup) */
+.tile-ph--marble  {--c1:#e9ebee;--c2:#cdd0d6;--c3:#fbfbfc;--vein:rgba(118,126,138,.34);--joint:rgba(120,128,140,.16)}
+.tile-ph--stone   {--c1:#c4c8cf;--c2:#9fa4ad;--c3:#dfe2e6;--vein:rgba(255,255,255,.5)}
+.tile-ph--warm    {--c1:#d9d3c8;--c2:#b8b1a4;--c3:#ece7df;--vein:rgba(255,255,255,.5);--joint:rgba(70,62,52,.16)}
+.tile-ph--graphite{--c1:#3b3f45;--c2:#23262b;--c3:#4b4f56;--vein:rgba(255,255,255,.13);--joint:rgba(0,0,0,.3)}
+.tile-ph--dark    {--c1:#2b2e33;--c2:#191b1f;--c3:#3a3d43;--vein:rgba(255,255,255,.1);--joint:rgba(0,0,0,.32)}
+/* real photo supplied: it replaces the gradient layers; keep only a faint edge */
+.tile-ph--has-img::after{box-shadow:inset 0 0 0 1px rgba(255,255,255,.1)}
+
+/* ── 19. RESPONSIVE ──────────────────────────────────────────────────────── */
+@media (max-width:980px){
+  .hero__grid{grid-template-columns:1fr;gap:2.5rem}
+  .hero__visual{aspect-ratio:16/11;max-width:560px}
+  .split{grid-template-columns:1fr;gap:2.2rem}
+  .split--rev .split__visual{order:-1}
+  .contact-grid{grid-template-columns:1fr}
+  .ftr__top{grid-template-columns:1fr 1fr;gap:2rem}
+  .quote-grid{columns:2 280px}
+}
+@media (max-width:760px){
+  .nav__links{
+    position:fixed;inset:0 0 0 auto;width:min(82vw,340px);flex-direction:column;
+    gap:.4rem;background:var(--snow);padding:6rem var(--gut) 2rem;
+    transform:translateX(100%);transition:transform .45s var(--ease);
+    box-shadow:-20px 0 60px -30px rgba(21,23,26,.4);z-index:95;
+  }
+  .nav.open .nav__links{transform:translateX(0)}
+  .nav__links a{font-family:var(--font-head);font-size:1.15rem;padding:.6rem 0;border-bottom:1px solid var(--mist)}
+  .nav__links a::after{display:none}
+  .burger{display:inline-flex;position:relative;z-index:96}
+  .hdr__phone{display:none}
+  .hdr__cta .btn{display:none}
+  .callbar{display:flex}
+  body{padding-bottom:4.5rem}
+  .ftr__top{grid-template-columns:1fr 1fr}
+  .quote-grid{columns:1}
+  .form__row{grid-template-columns:1fr}
+  .hero__meta dt{font-size:1.4rem}
+}
+@media (max-width:440px){
+  .ftr__top{grid-template-columns:1fr}
+  .trust__item{font-size:.85rem}
+}
+
+/* ── 20. REDUCED MOTION ──────────────────────────────────────────────────── */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
+  .reveal{opacity:1;transform:none}
+  .strip__track{animation:none;justify-content:center}
+}
